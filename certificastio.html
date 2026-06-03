@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CertificAst.io - Il Tuo Diploma di Astiosità</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <!-- PayPal SDK - Disabilita MyBank, mantiene PayPal e Carte -->
+    <script src="https://www.paypal.com/sdk/js?client-id=AfpJksPo2im9nuNaLP1DOof55kvrqWt9JkGUMs_6LXH4-P9RsJHILQQ-bmTPYeQ89rvCQWOuiFhXwTGK&currency=EUR&disable-funding=mybank"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #764ba2;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #764ba2;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 10px 30px rgba(238, 90, 36, 0.4);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(238, 90, 36, 0.6);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid rgba(118, 75, 162, 0.1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: #764ba2;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Order Form */
+        .order-form {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        }
+
+        .order-form h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #764ba2;
+        }
+
+        .price-display {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .price-display .price {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        .price-display .currency {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Button styles */
+        .btn-preview {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 1rem;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .btn-preview:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(76, 175, 80, 0.4);
+        }
+
+        .btn-payment {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        .btn-payment:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);
+        }
+
+        .btn-payment:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .separator {
+            text-align: center;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .separator::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #ddd;
+        }
+
+        .separator span {
+            background: white;
+            padding: 0 1rem;
+            color: #666;
+            font-weight: bold;
+        }
+
+        /* Success/Error Messages */
+        .message {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+        }
+
+        .message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #764ba2;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            line-height: 1.6;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #555;
+            padding-top: 2rem;
+            margin-top: 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .form-container {
+                margin: 0 1rem;
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">CertificAst.io</a>
+                <nav>
+                    <ul class="nav-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#features">Caratteristiche</a></li>
+                        <li><a href="#order">Ordina</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->\
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <img src="logonew2.png" alt="CertificAst.io Logo" class="hero-logo">
+                <h1>CertificAst.io</h1>
+                <p>Il primo e unico Diploma di Astiosità ufficiale</p>
+                <a href="#order" class="cta-button">
+                    <i class="fas fa-certificate"></i>
+                    Ordinalo subito!
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2>Perché scegliere CertificAst.io?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h3>Diploma Ufficiale</h3>
+                    <p>Ricevi o Regala un diploma personalizzato di Astiosità, perfetto per dimostrare le tue competenze nell'arte dell'astio.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-download"></i>
+                    </div>
+                    <h3>Download Immediato</h3>
+                    <p>Dopo il pagamento, ricevi immediatamente il tuo diploma in formato PDF ad alta risoluzione, pronto per la stampa.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Pagamento Sicuro</h3>
+                    <p>Con le transazioni protette da PayPal, il sistema di pagamento più sicuro al mondo. Sostieni il nostro lavoro e La tua privacy è garantita.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Order Form -->
+    <section id="order" class="order-form">
+        <div class="container">
+            <div class="form-container">
+                <h2>Ordina il tuo Diploma</h2>
+                
+                <!-- Messages -->
+                <div id="successMessage" class="message success"></div>
+                <div id="errorMessage" class="message error"></div>
+
+                <form id="diplomaForm">
+                    <div class="form-group">
+                        <label for="fullName">Nome Completo *</label>
+                        <input type="text" id="fullName" name="fullName" placeholder="Inserisci il tuo nome completo">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" placeholder="Inserisci la tua email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="birthDate">Data di Nascita</label>
+                        <input type="date" id="birthDate" name="birthDate">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="motivation">Specializzazione (Opzionale)</label>
+                        <textarea id="motivation" name="motivation" rows="4" placeholder="Es: Gestione Conflitti Familiari, Astio Professionale, Rancori Storici..."></textarea>
+                    </div>
+
+                    <!-- Anteprima Button -->
+                    <button type="button" id="previewBtn" class="btn-preview">
+                        <i class="fas fa-eye"></i>
+                        ANTEPRIMA CERTIFICATO GRATUITA
+                    </button>
+                    <p style="font-size: 0.9rem; color: #666; text-align: center; margin-bottom: 2rem;">
+                        👀 Guarda come sarà il tuo diploma (funziona anche senza compilare il form)
+                    </p>
+
+                    <div class="separator">
+                        <span>OPPURE</span>
+                    </div>
+
+                    <div class="price-display">
+                        <div class="price">1,00 <span class="currency">EUR</span></div>
+                        <p>Prezzo fisso - Nessun costo nascosto</p>
+                    </div>
+
+                    <!-- PayPal Button Container -->
+                    <div id="paypal-button-container"></div>
+
+                    <!-- Fallback Payment Button (nascosto) -->
+                    <button type="button" id="paymentBtn" class="btn-payment" style="display: none;">
+                        <i class="fas fa-credit-card"></i>
+                        PAGA 5€ E OTTIENI CERTIFICATO UFFICIALE
+                    </button>
+                    <p style="font-size: 0.9rem; color: #666; text-align: center; margin-top: 1rem;">
+                        💳 Pagamento sicuro con PayPal
+                    </p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Ast.io</h3>
+                    <p>Il primo servizio al mondo per ottenere il tuo Diploma di Astiosità ufficiale.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Link Rapidi</h3>
+                    <p><a href="#home">Home</a></p>
+                    <p><a href="#features">Caratteristiche</a></p>
+                    <p><a href="#order">Ordina</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Supporto</h3>
+                    <p>Email: info@ast.io</p>
+                    <p>Telefono: +39 123 456 7890</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Ast.io. Tutti i diritti riservati.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        console.log('🚀 Script caricato!');
+
+        // === MODALITÀ DEV ===
+        // Attiva con: ?dev=true nell'URL oppure premi Shift+Ctrl+D
+        const DEV_MODE = new URLSearchParams(window.location.search).get('dev') === 'true';
+
+        if (DEV_MODE) {
+            console.warn('🛠️ MODALITÀ DEV ATTIVA - pagamento bypассato');
+            // Banner visibile solo in dev
+            const devBanner = document.createElement('div');
+            devBanner.textContent = '🛠️ DEV MODE — stampa senza pagamento attiva';
+            devBanner.style.cssText = 'position:fixed;bottom:0;left:0;right:0;background:#e74c3c;color:#fff;text-align:center;padding:8px;font-weight:bold;z-index:9999;font-size:14px;';
+            document.body.appendChild(devBanner);
+        }
+
+        // Shortcut Shift+Ctrl+D per attivare dev mode senza toccare l'URL
+        let devKeyBuffer = [];
+        document.addEventListener('keydown', function(e) {
+            if (e.shiftKey && e.ctrlKey && e.key === 'D') {
+                const url = new URL(window.location.href);
+                if (url.searchParams.get('dev') === 'true') {
+                    url.searchParams.delete('dev');
+                } else {
+                    url.searchParams.set('dev', 'true');
+                }
+                window.location.href = url.toString();
+            }
+        });
+
+        // Elementi DOM
+        const previewBtn = document.getElementById('previewBtn');
+        const paymentBtn = document.getElementById('paymentBtn');
+        const successMessage = document.getElementById('successMessage');
+        const errorMessage = document.getElementById('errorMessage');
+
+        // Funzioni utility
+        function showMessage(element, message) {
+            element.textContent = message;
+            element.style.display = 'block';
+            setTimeout(() => {
+                element.style.display = 'none';
+            }, 5000);
+        }
+
+        function showSuccess(message) {
+            console.log('✅ Successo:', message);
+            errorMessage.style.display = 'none';
+            showMessage(successMessage, message);
+        }
+
+        function showError(message) {
+            console.log('❌ Errore:', message);
+            successMessage.style.display = 'none';
+            showMessage(errorMessage, message);
+        }
+
+        function validateForm() {
+            const name = document.getElementById('fullName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            
+            if (!name) {
+                showError('Il nome è obbligatorio per il certificato ufficiale');
+                return false;
+            }
+            
+            if (!email || !email.includes('@')) {
+                showError('Inserisci un email valido');
+                return false;
+            }
+            
+            return true;
+        }
+
+        function createDiplomaContent(name, email, birthDate, motivation, isPreview = false) {
+            // Crea il contenuto HTML usando il template dell'immagine in formato orizzontale
+            const watermarkStyle = isPreview ? `
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%) rotate(-45deg);
+                font-size: 80px;
+                color: rgba(255, 0, 0, 0.08);
+                font-weight: bold;
+                z-index: 10;
+                pointer-events: none;
+            ` : 'display: none;';
+            
+            const certificateTitle = isPreview ? 'ANTEPRIMA NON UFFICIALE' : 'ATTESTATO DI COMPLETAMENTO';
+            const borderColor = isPreview ? '#FF9800' : '#4CAF50';
+            
+            return `
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Diploma di Astiosità - ${name}</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@400;600&display=swap');
+        
+        body {
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            font-family: 'Open Sans', sans-serif;
+        }
+        
+        .certificate-container {
+            width: 1000px;
+            height: 700px;
+            margin: 0 auto;
+            background: white;
+            border: 4px solid ${borderColor};
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .certificate-bg {
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTMwNyIgaGVpZ2h0PSI5MjQiIHZpZXdCb3g9IjAgMCAxMzA3IDkyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTAgMEgxMzA3VjkyNEgwVjBaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMCAwTDY1MyAwTDEzMDcgMjMxVjBIMTMwN1YwWiIgZmlsbD0iI0ZGQTc4QyIvPgo8cGF0aCBkPSJNMCAwTDY1MyAwTDEzMDcgMjMxVjBIMTMwN1YwWiIgZmlsbD0iI0ZGOTk4QiIvPgo8cGF0aCBkPSJNMCAwSDEzMDdWMjMxTDY1MyAwTDAgMFoiIGZpbGw9IiNGRkE3OEMiLz4KPHBhdGggZD0iTTAgOTI0TDY1MyA5MjRMMTMwNyA2OTNWOTI0SDEzMDdWOTI0WiIgZmlsbD0iI0ZGQTc4QyIvPgo8cGF0aCBkPSJNMCA5MjRINjUzTDEzMDcgNjkzVjkyNEgwVjkyNFoiIGZpbGw9IiNGRkJCOUUiLz4KPHBhdGggZD0iTTAgOTI0TDAgNjkzTDY1MyA5MjRIMFoiIGZpbGw9IiNGRjk5OEIiLz4KPHBhdGggZD0iTTEzMDcgOTI0TDEzMDcgNjkzTDY1MyA5MjRIMTMwN1oiIGZpbGw9IiNGRkJCOUUiLz4KPC9zdmc+');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            width: 100%;
+            height: 100%;
+            position: relative;
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            grid-template-rows: auto 1fr auto;
+            padding: 40px;
+            box-sizing: border-box;
+        }
+        
+        .watermark {
+            ${watermarkStyle}
+        }
+        
+        .header-section {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .certificate-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 8px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+        
+        .subtitle {
+            font-size: 1rem;
+            color: #666;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+        
+        .left-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .authority {
+            text-align: center;
+        }
+        
+        .authority-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        .authority-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .seal {
+            width: 70px;
+            height: 70px;
+            background: #FFD700;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: #333;
+            border: 3px solid #FFA500;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            margin: 0 auto;
+        }
+        
+        .center-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+        
+        .recipient-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin: 20px 0;
+            border-bottom: 2px solid #333;
+            padding-bottom: 8px;
+            min-width: 300px;
+            display: inline-block;
+        }
+        
+        .course-info {
+            font-size: 1rem;
+            color: #444;
+            line-height: 1.6;
+            margin: 20px 0;
+            max-width: 450px;
+        }
+        
+        .course-name {
+            font-weight: 700;
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+        
+        .achievement {
+            font-weight: 600;
+            color: #e74c3c;
+        }
+        
+        .qualification {
+            font-weight: 700;
+            color: #27ae60;
+            font-size: 1.1rem;
+            display: block;
+            margin-top: 10px;
+        }
+        
+        .right-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .details-title {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .details-content {
+            font-size: 0.8rem;
+            color: #444;
+            line-height: 1.5;
+        }
+        
+        ${isPreview ? `
+        .preview-banner {
+            background: #FF9800;
+            color: white;
+            text-align: center;
+            padding: 12px;
+            font-weight: bold;
+            font-size: 14px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 20;
+        }
+        ` : ''}
+        
+        .motivation-section {
+            background: rgba(255, 255, 255, 0.9);
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+            max-width: 400px;
+        }
+        
+        .motivation-title {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .motivation-text {
+            font-style: italic;
+            color: #555;
+            line-height: 1.4;
+            font-size: 0.9rem;
+        }
+        
+        .footer-section {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            font-size: 0.8rem;
+            color: #666;
+            font-style: italic;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .certificate-container {
+                border: 2px solid #333;
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="certificate-container">
+        ${isPreview ? '<div class="preview-banner">👀 ANTEPRIMA NON UFFICIALE - Compila il form per il certificato ufficiale!</div>' : ''}
+        
+        <div class="certificate-bg">
+            <div class="watermark">ANTEPRIMA</div>
+            
+            <div class="header-section">
+                <div class="certificate-title">${certificateTitle}</div>
+                <div class="subtitle">SI CERTIFICA CHE</div>
+            </div>
+            
+            <div class="left-section">
+                <div class="authority">
+                    <div class="authority-label">Rettore Protempore</div>
+                    <div class="authority-name">Prof. Astio Maximus</div>
+                </div>
+                <div class="seal">🏛️</div>
+            </div>
+            
+            <div class="center-section">
+                <div class="recipient-name">
+                    ${name.toUpperCase()}
+                    ${birthDate && birthDate !== '[Data di Nascita]' ? `<br><span style="font-size: 0.6em; font-weight: 400; color: #666;">nato il ${new Date(birthDate).toLocaleDateString('it-IT')}</span>` : ''}
+                </div>
+                
+                <div class="course-info">
+                    ha completato il corso di studi in<br>
+                    <span class="course-name">Astio Management</span><br>
+                    ${motivation && motivation.trim() && motivation !== '[La Tua Motivazione]' ? `
+                    con specializzazione in<br>
+                    <span class="qualification">${motivation.toUpperCase()}</span><br>
+                    ` : ''}
+                    ottenendo con <span class="achievement">lode</span> e <span class="achievement">merito</span><br>
+                    la qualifica di<br>
+                    <span class="qualification">MAESTRO DELL'ASTIOSITÀ CERTIFICATO</span>
+                </div>
+            </div>
+            
+            <div class="right-section">
+                <div class="details-title">Responsabile Formazione</div>
+                <div class="details-content">
+                    <strong>Accademia Ast.io</strong><br><br>
+                    Email: ${email}<br>
+                    Data: ${new Date().toLocaleDateString('it-IT')}<br>
+                    ID: ${isPreview ? 'PREVIEW' : `AST${Date.now()}`}<br>
+                    Ore: ${new Date().toLocaleTimeString('it-IT')}
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                "L'astio è un'arte, e tu ne sei diventato maestro" - Accademia Ast.io ©${new Date().getFullYear()}
+            </div>
+        </div>
+    </div>
+</body>
+</html>`;
+        }
+
+        function openDiplomaWindow(content, name, isPreview = false) {
+            const windowTitle = isPreview ? 'Anteprima Diploma' : 'Certificato Ufficiale';
+            
+            const popup = window.open('', '_blank', 'width=1100,height=800,scrollbars=yes,resizable=yes');
+            
+            if (!popup) {
+                alert('❌ Il browser ha bloccato il popup. Abilita i popup per questo sito.');
+                return;
+            }
+
+            // Scrivi direttamente il contenuto HTML del certificato
+            popup.document.write(content);
+            popup.document.close();
+            
+            // Aggiungi i pulsanti di azione
+            setTimeout(() => {
+                const actionsDiv = popup.document.createElement('div');
+                actionsDiv.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: rgba(0,0,0,0.8);
+                    padding: 15px;
+                    border-radius: 10px;
+                    display: flex;
+                    gap: 10px;
+                    z-index: 1000;
+                `;
+                
+                // Pulsante stampa
+                const printBtn = popup.document.createElement('button');
+                printBtn.innerHTML = '🖨️ Stampa';
+                printBtn.style.cssText = `
+                    background: #4CAF50;
+                    color: white;
+                    border: none;
+                    padding: 8px 16px;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    font-weight: bold;
+                `;
+                printBtn.onclick = () => popup.print();
+                
+                // Pulsante download (solo per versione ufficiale)
+                if (!isPreview) {
+                    const downloadBtn = popup.document.createElement('button');
+                    downloadBtn.innerHTML = '📄 Scarica';
+                    downloadBtn.style.cssText = printBtn.style.cssText + 'background: #2196F3;';
+                    downloadBtn.onclick = () => {
+                        const htmlContent = popup.document.documentElement.outerHTML;
+                        const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8' });
+                        const url = URL.createObjectURL(blob);
+                        const a = popup.document.createElement('a');
+                        a.href = url;
+                        a.download = `Diploma_Ufficiale_${name.replace(/\s+/g, '_')}.html`;
+                        a.click();
+                        URL.revokeObjectURL(url);
+                    };
+                    actionsDiv.appendChild(downloadBtn);
+                }
+                
+                // Pulsante chiudi
+                const closeBtn = popup.document.createElement('button');
+                closeBtn.innerHTML = '❌ Chiudi';
+                closeBtn.style.cssText = printBtn.style.cssText + 'background: #f44336;';
+                closeBtn.onclick = () => popup.close();
+                
+                actionsDiv.appendChild(printBtn);
+                actionsDiv.appendChild(closeBtn);
+                popup.document.body.appendChild(actionsDiv);
+                
+            }, 100);
+            
+            console.log(`Finestra ${isPreview ? 'anteprima' : 'ufficiale'} aperta per: ${name}`);
+        }
+
+        function downloadFile(content, filename) {
+            try {
+                // Se è contenuto HTML, salva come HTML
+                let blob, finalFilename;
+                if (content.includes('<!DOCTYPE html>')) {
+                    blob = new Blob([content], { type: 'text/html;charset=utf-8' });
+                    finalFilename = filename.replace('.txt', '.html');
+                } else {
+                    blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+                    finalFilename = filename;
+                }
+                
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = finalFilename;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                console.log('✅ Download completato:', finalFilename);
+                return true;
+            } catch (error) {
+                console.error('❌ Errore download:', error);
+                return false;
+            }
+        }
+
+        // Event Listeners
+        if (previewBtn) {
+            previewBtn.addEventListener('click', function() {
+                console.log('🔍 Clic su anteprima');
+                
+                const name = document.getElementById('fullName').value.trim() || '[Il Tuo Nome]';
+                const email = document.getElementById('email').value.trim() || '[La Tua Email]';
+                const birthDate = document.getElementById('birthDate').value;
+                const motivation = document.getElementById('motivation').value.trim();
+                
+                console.log('Dati anteprima:', { name, email, birthDate, motivation });
+                
+                const content = createDiplomaContent(name, email, birthDate, motivation, true);
+                openDiplomaWindow(content, name, true);
+                
+                showSuccess('👀 Anteprima generata! Compila il form per il certificato ufficiale.');
+            });
+            console.log('✅ Event listener anteprima aggiunto');
+        } else {
+            console.error('❌ Pulsante anteprima non trovato');
+        }
+
+        if (paymentBtn) {
+            paymentBtn.addEventListener('click', function() {
+                console.log('💳 Clic su pagamento');
+                
+                if (!validateForm()) {
+                    return;
+                }
+                
+                // Disabilita pulsante e mostra loading
+                paymentBtn.disabled = true;
+                paymentBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processando pagamento...';
+                
+                console.log('⏳ Simulazione pagamento iniziata...');
+                
+                setTimeout(() => {
+                    const name = document.getElementById('fullName').value.trim();
+                    const email = document.getElementById('email').value.trim();
+                    const birthDate = document.getElementById('birthDate').value;
+                    const motivation = document.getElementById('motivation').value.trim();
+                    
+                    console.log('Dati pagamento:', { name, email, birthDate, motivation });
+                    
+                    const content = createDiplomaContent(name, email, birthDate, motivation, false);
+                    const filename = `Diploma_Ufficiale_${name.replace(/\s+/g, '_')}.html`;
+                    
+                    // Download automatico
+                    const downloadSuccess = downloadFile(content, filename);
+                    
+                    // Apri finestra
+                    openDiplomaWindow(content, name, false);
+                    
+                    // Reset form e pulsante
+                    document.getElementById('diplomaForm').reset();
+                    paymentBtn.disabled = false;
+                    paymentBtn.innerHTML = '<i class="fas fa-credit-card"></i> PAGA 5€ E OTTIENI CERTIFICATO UFFICIALE';
+                    
+                    showSuccess('🎉 Pagamento completato! Il certificato è stato generato e scaricato.');
+                    
+                    console.log('✅ Processo pagamento completato');
+                }, 3000);
+            });
+            console.log('✅ Event listener pagamento aggiunto');
+        } else {
+            console.error('❌ Pulsante pagamento non trovato');
+        }
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        console.log('🎯 Inizializzazione completata!');
+
+        // Funzione per inviare dati al backend
+        async function sendToBackend(name, email, birthDate, motivation, paypalOrderId, paypalPayerId) {
+            try {
+                console.log('📧 Invio dati al backend per email...');
+
+                // URL del tuo script PHP su Aruba
+                // IMPORTANTE: Sostituisci con il tuo dominio reale quando carichi su Aruba
+                const backendUrl = window.location.origin + '/send-certificate.php';
+                // Per test locale: const backendUrl = 'http://localhost/certificastio/send-certificate.php';
+
+                const response = await fetch(backendUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        name: name,
+                        email: email,
+                        birthDate: birthDate,
+                        motivation: motivation,
+                        paypalOrderId: paypalOrderId,
+                        paypalPayerId: paypalPayerId
+                    })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    console.log('✅ Email inviata con successo!');
+                } else {
+                    console.error('❌ Errore invio email:', result.error);
+                    // Non bloccare il flusso, l'utente ha già il download locale
+                }
+
+            } catch (error) {
+                console.error('❌ Errore chiamata backend:', error);
+                // Non bloccare il flusso, l'utente ha già il download locale
+            }
+        }
+
+        // In DEV MODE bypassa PayPal con un pulsante diretto
+        if (DEV_MODE) {
+            const container = document.getElementById('paypal-button-container');
+            const devBtn = document.createElement('button');
+            devBtn.type = 'button';
+            devBtn.innerHTML = '🛠️ [DEV] GENERA CERTIFICATO SENZA PAGAMENTO';
+            devBtn.className = 'btn-payment';
+            devBtn.style.background = 'linear-gradient(45deg,#e74c3c,#c0392b)';
+            devBtn.addEventListener('click', function() {
+                const name = document.getElementById('fullName').value.trim() || 'Dev Tester';
+                const email = document.getElementById('email').value.trim() || 'dev@test.local';
+                const birthDate = document.getElementById('birthDate').value;
+                const motivation = document.getElementById('motivation').value.trim();
+                const content = createDiplomaContent(name, email, birthDate, motivation, false);
+                downloadFile(content, `Diploma_DEV_${name.replace(/\s+/g,'_')}.html`);
+                openDiplomaWindow(content, name, false);
+                showSuccess('[DEV] Certificato generato senza pagamento.');
+            });
+            container.appendChild(devBtn);
+        }
+
+        // Inizializza PayPal
+        if (!DEV_MODE && window.paypal) {
+            paypal.Buttons({
+                // Crea l'ordine
+                createOrder: function(data, actions) {
+                    console.log('💳 Creazione ordine PayPal...');
+
+                    // Valida il form prima di procedere
+                    if (!validateForm()) {
+                        return Promise.reject(new Error('Form non valido'));
+                    }
+
+                    return actions.order.create({
+                        purchase_units: [{
+                            description: 'Diploma di Astiosità Certificato',
+                            amount: {
+                                currency_code: 'EUR',
+                                value: '1.00'
+                            }
+                        }]
+                    });
+                },
+
+                // Quando il pagamento viene approvato
+                onApprove: function(data, actions) {
+                    console.log('✅ Pagamento approvato!', data);
+
+                    return actions.order.capture().then(function(orderData) {
+                        console.log('💰 Pagamento completato:', orderData);
+
+                        // Recupera i dati del form
+                        const name = document.getElementById('fullName').value.trim();
+                        const email = document.getElementById('email').value.trim();
+                        const birthDate = document.getElementById('birthDate').value;
+                        const motivation = document.getElementById('motivation').value.trim();
+
+                        // Genera il certificato ufficiale
+                        const content = createDiplomaContent(name, email, birthDate, motivation, false);
+                        const filename = `Diploma_Ufficiale_${name.replace(/\s+/g, '_')}.html`;
+
+                        // Download automatico
+                        downloadFile(content, filename);
+
+                        // Apri finestra certificato
+                        openDiplomaWindow(content, name, false);
+
+                        // Invia dati al backend per invio email
+                        sendToBackend(name, email, birthDate, motivation, orderData.id, orderData.payer.payer_id);
+
+                        // Mostra messaggio di successo
+                        showSuccess('🎉 Pagamento completato! Il tuo Diploma Ufficiale è pronto. Controlla anche la tua email.');
+
+                        // Reset form
+                        document.getElementById('diplomaForm').reset();
+                    });
+                },
+
+                // Gestione errori
+                onError: function(err) {
+                    console.error('❌ Errore PayPal:', err);
+                    showError('Si è verificato un errore durante il pagamento. Riprova.');
+                },
+
+                // Gestione annullamento
+                onCancel: function(data) {
+                    console.log('❌ Pagamento annullato', data);
+                    showError('Pagamento annullato. Puoi riprovare quando vuoi.');
+                },
+
+                // Stile del pulsante PayPal
+                style: {
+                    layout: 'vertical',
+                    color: 'gold',
+                    shape: 'pill',
+                    label: 'paypal',
+                    height: 50
+                }
+            }).render('#paypal-button-container');
+
+            console.log('✅ Pulsante PayPal inizializzato');
+        } else if (!DEV_MODE) {
+            console.error('❌ SDK PayPal non caricato');
+            document.getElementById('paymentBtn').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
